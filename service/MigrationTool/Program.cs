@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
@@ -21,11 +20,13 @@ namespace MigrationTool
             Console.WriteLine("Testing connection ...");
 
             int maxCount = 100;
-            while (!Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext")) && maxCount > 0)
+            var exception = Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext"));
+            while (exception != null && maxCount > 0)
             {
-                Console.WriteLine($"Failed to connect {maxCount}/100, sleeping 5 seconds ... (Db is starting and not yet ready? or down)");
+                Console.WriteLine($"Failed to connect {maxCount}/100, sleeping 5 seconds ... ({exception.ToString()})");
                 System.Threading.Thread.Sleep(5000);
                 maxCount--;
+                exception = Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext"));
             }
 
             Migrator.EnsureLastMigration(configuration.GetConnectionString("QuizmeisterContext"));
