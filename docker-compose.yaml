@@ -6,11 +6,11 @@ services:
     build: 
       context: ./service
       args:
-        QuizmeisterConnectionString: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18:8092"
+        QuizmeisterConnectionString: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18,8092"
     ports:
       - "8091:5000"
     environment:
-      QUIZMEISTER_ConnectionStrings__QuizmeisterContext: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18:8092"
+      QUIZMEISTER_ConnectionStrings__QuizmeisterContext: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18,8092"
       QUIZMEISTER_ConnectionStrings__QuizmeisterSignalR: "${QUIZMEISTER_SIGNALR_CONNECTIONSTRING}"
       QUIZMEISTER_ApplicationInsights__InstrumentationKey: ""
       ASPNETCORE_URLS: "http://+:5000"

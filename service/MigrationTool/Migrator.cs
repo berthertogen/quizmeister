@@ -14,6 +14,7 @@ namespace MigrationTool
             {
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
+                    scope.ServiceProvider.GetService<QuizmeisterContext>().Quizzes.Find(1);
                     return scope.ServiceProvider.GetService<QuizmeisterContext>().Database.CanConnect();
                 }
             }
