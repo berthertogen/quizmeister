@@ -151,7 +151,7 @@ namespace DatabaseSeeder
                     .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                     .AddJsonFile("appsettings.json", false)
                     .AddJsonFile("appsettings.dev.json", true)
-                    .AddEnvironmentVariables()
+                    .AddEnvironmentVariables(prefix: "QUIZMEISTER_")
                     .Build();
             var connectionString = configuration.GetConnectionString("QuizmeisterContext");
             return connectionString;

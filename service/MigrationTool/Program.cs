@@ -13,16 +13,18 @@ namespace MigrationTool
               .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
               .AddJsonFile("appsettings.json", false)
               .AddJsonFile("appsettings.dev.json", true)
-              .AddEnvironmentVariables()
+              .AddEnvironmentVariables(prefix: "QUIZMEISTER_")
               .Build();
             Console.WriteLine($"Applying migrations. ({configuration.GetSection("ConnectionStrings").GetValue<string>("QuizmeisterContext")})");
 
             Console.WriteLine("Testing connection ...");
 
-            while (!Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext")))
+            int maxCount = 100;
+            while (!Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext")) && maxCount > 0)
             {
-                Console.WriteLine($"Failed to connect, sleeping 5 seconds ... (Db is starting and not yet ready? or down)");
+                Console.WriteLine($"Failed to connect {maxCount}/100, sleeping 5 seconds ... (Db is starting and not yet ready? or down)");
                 System.Threading.Thread.Sleep(5000);
+                maxCount--;
             }
 
             Migrator.EnsureLastMigration(configuration.GetConnectionString("QuizmeisterContext"));
