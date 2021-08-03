@@ -8,6 +8,17 @@ namespace MigrationTool
 {
     public class Migrator
     {
+        public static bool CanConnect(string connectionString)
+        {
+            using (var serviceProvider = BuildServiceProvider(connectionString))
+            {
+                using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    return scope.ServiceProvider.GetService<QuizmeisterContext>().Database.CanConnect();
+                }
+            }
+        }
+
         public static void EnsureLastMigration(string connectionString)
         {
             using (var serviceProvider = BuildServiceProvider(connectionString))
