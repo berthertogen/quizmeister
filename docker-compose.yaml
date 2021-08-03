@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  quizmeister-service:
+    depends_on: quizmeister-sql
+    build: ./service
+    ports:
+      - "8091:5003"
+    environment:
+      QUIZMEISTER_ConnectionStrings__QuizmeisterContext: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18:8092"
+      QUIZMEISTER_ConnectionStrings__QuizmeisterSignalR: "${QUIZMEISTER_SIGNALR_CONNECTIONSTRING}"
+      QUIZMEISTER_ApplicationInsights__InstrumentationKey: ""
+
+  quizmeister-sql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "8092:1433"
+    volumes:
+      - "/volume1/docker/quizmeister-sql:/var/opt/mssql"
+    environment:
+      MSSQL_PID: Developer
+      SA_PASSWORD: ${QUIZMEISTER_SQL_PASSWORD}
+      ACCEPT_EULA: Y

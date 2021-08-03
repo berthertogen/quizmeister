@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Verwijder {{data.shortId}} - {{data.title}}</h1>
+<div mat-dialog-content>
+  <p>Wil je volgende vragen mee verwijderen?</p>
+  <mat-list>
+    <mat-list-item *ngFor="let question of data?.questions">{{question.shortId}} - {{question.title}}</mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="basic" (click)="cancel()">Annuleren</button>
+  <button mat-button color="basic" (click)="no()">Neen</button>
+  <button mat-raised-button color="primary" (click)="yes()" cdkFocusInitial>Ja</button>
+</div>

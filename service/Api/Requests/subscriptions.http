@@ -1,0 +1,16 @@
+
+# Search for a subscription
+http://localhost:5003/subscription/41
+
+###
+
+#Change subscription status
+PUT http://localhost:5003/subscription/143/status
+content-type: application/json
+
+1
+
+###
+
+#Delete subscription
+DELETE http://localhost:5003/subscription/148

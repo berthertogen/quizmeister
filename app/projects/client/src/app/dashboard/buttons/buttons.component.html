@@ -1,0 +1,43 @@
+<section id="dashboard">
+  <div>
+    <a mat-raised-button color="primary" routerLink="/search" aria-label="zoek een quiz" class="big-button">Zoek een
+      quiz
+      <mat-icon>search</mat-icon>
+    </a>
+    <button mat-raised-button color="primary" routerLink="/my-list" aria-label="mijn quizzes" class="big-button"
+      [disabled]="user.default">Mijn quizzes
+      <mat-icon>face</mat-icon>
+    </button>
+  </div>
+  <div>
+    <ng-container *ngIf="subscription$ | async as subscription">
+      <ng-container [ngSwitch]="subscription.status">
+        <button *ngSwitchCase="'loading'" mat-raised-button color="primary" aria-label="actieve quiz" class="big-button"
+          [disabled]="true">Actieve
+          quiz
+          <mat-icon>play_circle_outline</mat-icon>
+        </button>
+        <button *ngSwitchCase="'error'" mat-raised-button color="primary" aria-label="actieve quiz" class="big-button"
+          [disabled]="true">Actieve
+          quiz
+          <mat-icon>play_circle_outline</mat-icon>
+        </button>
+        <button [disabled]="subscription.data.default" *ngSwitchDefault mat-raised-button color="primary"
+          [routerLink]="['/quiz',subscription.data.quiz?.quizId]" aria-label="actieve quiz" class="big-button">Actieve
+          quiz
+          <mat-icon>play_circle_outline</mat-icon>
+        </button>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!user.default; else loggedOff">
+      <a mat-raised-button color="primary" routerLink="/logoff" aria-label="meld je af" class="big-button">Afmelden
+        <mat-icon>person</mat-icon>
+      </a>
+    </ng-container>
+    <ng-template #loggedOff>
+      <a mat-raised-button color="primary" routerLink="/login" aria-label="meld je aan" class="big-button">Aanmelden
+        <mat-icon>person</mat-icon>
+      </a>
+    </ng-template>
+  </div>
+</section>

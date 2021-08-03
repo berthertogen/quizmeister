@@ -1,0 +1,29 @@
+<div data-test-id="component-questions">
+  <mat-form-field>
+    <input data-test-id="input-search" type="search" matInput placeholder="Zoeken" [formControl]="search" autocomplete="off" />
+  </mat-form-field>
+
+  <ng-container *ngIf="questions$ | async as questions">
+    <ng-container [ngSwitch]="questions.status">
+      <div *ngSwitchCase="'loading'">
+        <app-loading></app-loading>
+      </div>
+
+      <div *ngSwitchCase="'error'">
+        Er is iets fout gegaan tijdens het ophalen van de quizzen waar je aan deelneemt, probeer de pagina even te
+        refreshen.
+      </div>
+
+      <div *ngSwitchDefault>
+        <app-table-question [questions]="questions.data" (copyQuestion)="copy($event)" (deleteQuestion)="delete($event)">
+        </app-table-question>
+      </div>
+    </ng-container>
+  </ng-container>
+
+
+  <button data-test-id="button-add-question" class="add" mat-raised-button color="primary" routerLink="../add">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+    <span>Toevoegen</span>
+  </button>
+</div>

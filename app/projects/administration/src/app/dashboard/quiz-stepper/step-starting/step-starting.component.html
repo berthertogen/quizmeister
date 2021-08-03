@@ -1,0 +1,33 @@
+<div *ngIf="(subscriptions | subscriptionStatus: [subscriptionStatus.joined]) as joinedSubscriptions" aria-label="Aangekomen teams">
+  <p>Aangekomen teams ({{joinedSubscriptions?.length}}/{{subscriptions.length}}):</p>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let subscription of joinedSubscriptions" role="listitem">
+      {{ subscription.team }} ({{subscription.email}})
+    </mat-list-item>
+  </mat-list>
+</div>
+<div *ngIf="(subscriptions | subscriptionStatus: [subscriptionStatus.new]) as newSubscriptions" aria-label="Nog niet aangemelde teams">
+  <p>Nog niet aangemelde teams {{newSubscriptions.length}}/{{subscriptions.length}}):</p>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let subscription of newSubscriptions" role="listitem">
+      <button mat-icon-button color="warn" (click)="delete.emit(subscription)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      {{ subscription.team }} ({{subscription.email}})
+    </mat-list-item>
+  </mat-list>
+</div>
+<div *ngIf="(subscriptions | subscriptionStatus: [subscriptionStatus.queued]) as queuedSubscriptions" aria-label="Teams op de wachtlijst">
+  <p>Teams op de wachtlijst ({{queuedSubscriptions.length}}/{{subscriptions.length}}):</p>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let subscription of queuedSubscriptions" role="listitem">
+      <button mat-icon-button color="warn" (click)="delete.emit(subscription)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="new.emit(subscription)">
+        <mat-icon>undo</mat-icon>
+      </button>
+      {{ subscription.team }} ({{subscription.email}})
+    </mat-list-item>
+  </mat-list>
+</div>

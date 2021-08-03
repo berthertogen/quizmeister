@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <button mat-button color="basic" routerLink="/dashboard" aria-label="terug naar dashboard">
+    <mat-icon>keyboard_backspace</mat-icon>&nbsp;Dashboard
+  </button>
+  <button mat-button [matMenuTriggerFor]="appMenu" color="basic" aria-label="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #appMenu="matMenu" yPosition="above" xPosition="before">
+  <a mat-menu-item color="primary" routerLink="/search" aria-label="zoek een quiz">
+    <mat-icon>search</mat-icon>Zoek een quiz
+  </a>
+  <a mat-menu-item color="primary" routerLink="/my-list" aria-label="mijn quizzes" [disabled]="user.default">
+    <mat-icon>face</mat-icon>Mijn quizzes
+  </a>
+  <a mat-menu-item color="primary" routerLink="/active" aria-label="actieve quizzes" [disabled]="user.default">
+    <mat-icon>play_circle_outline</mat-icon>Actieve quiz
+  </a>
+  <ng-container *ngIf="!user?.default; else loggedOff">
+    <a mat-menu-item routerLink="/logoff" aria-label="afmelden">
+      <mat-icon>person</mat-icon>Afmelden
+    </a>
+  </ng-container>
+  <ng-template #loggedOff>
+    <a mat-menu-item routerLink="/logon" aria-label="aanmelden">
+      <mat-icon>person</mat-icon>Aanmelden
+    </a>
+  </ng-template>
+</mat-menu>

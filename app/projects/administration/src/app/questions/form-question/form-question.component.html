@@ -1,0 +1,63 @@
+<form (submit)="onSubmit()" [formGroup]="questionForm" autocomplete="off">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Vraag</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Titel" formControlName="title" required />
+      </mat-form-field>
+      <label class="mat-small">Type van vraag:</label>
+      <mat-radio-group formControlName="type">
+        <mat-radio-button data-test-id="input-radio-vraag-type-open" [value]="1">Open</mat-radio-button>
+        <mat-radio-button data-test-id="input-radio-vraag-type-meerkeuze" [value]="2">Meerkeuze</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <textarea type="text" matInput placeholder="Opmerking" formControlName="remark"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Scoring</mat-card-title>
+    </mat-card-header>
+    <mat-card-content formGroupName="scoring">
+      <label class="mat-small">Type van scoring:</label>
+      <mat-radio-group formControlName="type">
+        <mat-radio-button data-test-id="input-radio-scoring-type-correct" [value]="1">Per correct antwoord</mat-radio-button>
+        <mat-radio-button data-test-id="input-radio-scoring-type-tijd" [value]="2">Tijdsscoring</mat-radio-button>
+        <mat-radio-button data-test-id="input-radio-scoring-type-kennis" [value]="3">Unieke kennis</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Gewicht correct antwoord" formControlName="weightCorrectAnswer" />
+      </mat-form-field>
+      <mat-form-field *ngIf="scoringType.value === 1">
+        <input type="number" matInput placeholder="Gewicht geen antwoord" formControlName="weightNoAnswer" />
+      </mat-form-field>
+      <mat-form-field *ngIf="scoringType.value === 2">
+        <input type="number" matInput placeholder="Tijdslimiet (seconden)" formControlName="timeLimitSeconds" />
+      </mat-form-field>
+      <mat-form-field *ngIf="scoringType.value === 2">
+        <input type="number" matInput placeholder="Tijdsinterval (seconden)" formControlName="timeScoringInterval" />
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Antwoorden</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-answer [options]="options" formControlName="answers"></app-answer>
+    </mat-card-content>
+  </mat-card>
+  <div class="rounds">
+    <label>Gelinkt aan rondes:</label>
+    <mat-chip-list>
+      <mat-chip *ngFor="let round of question?.rounds">{{round.shortId}} - {{round.title}}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="buttons">
+    <button data-test-id="button-opslaan" mat-raised-button color="primary" type="submit" [disabled]="!questionForm.valid">Opslaan</button>
+    <button mat-button [routerLink]="cancelRoute">Annuleren</button>
+  </div>
+</form>

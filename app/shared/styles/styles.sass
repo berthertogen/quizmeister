@@ -1,0 +1,23 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css'
+@import './_variables'
+
+html
+  height: 100%
+
+  body
+    height: 100%
+    margin: 0  
+
+    app-root
+      display: flex
+      flex-direction: column
+      height: 100%  
+
+    .mat-primary-background
+      background-color: mat-color($primaryPalette)
+      
+    .mat-primary-border
+      border-color: mat-color($primaryPalette)
+      
+    .mat-primary
+      color: mat-color($primaryPalette)

@@ -1,0 +1,129 @@
+<h1>{{ quiz.shortId }} - {{ quiz.title }} ({{displayQuizStatus(quiz.status)}})</h1>
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [disabled]="true" [expanded]="quiz.status === 1" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title><span class="number-badge mat-primary-background">1</span></mat-panel-title>
+      <mat-panel-description>
+        Nieuw - nog geen inschrijvingen mogelijk
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="quiz.status === 1">
+      <app-step-new [quiz]="quiz"></app-step-new>
+    </ng-container>
+
+    <mat-action-row>
+      <button mat-flat-button color="primary" (click)="nextStep()">Open deze quiz voor inschrijvingen <mat-icon>redo
+        </mat-icon></button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [disabled]="true" [expanded]="quiz.status === 2" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title><span class="number-badge mat-primary-background">2</span></mat-panel-title>
+      <mat-panel-description>
+        Inschrijven - deelnemers kunnen hun team inschrijven tot het max bereikt is
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="(newSubscriptions$ | async) as newSubscriptions">
+      <app-step-open [quiz]="quiz" [subscriptions]="newSubscriptions" (delete)="deleteSubscription($event)">
+      </app-step-open>
+    </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">
+        <mat-icon>undo</mat-icon> Annuleer het openen voor inschrijving
+      </button>
+      <button mat-flat-button color="primary" (click)="nextStep()">Sluit de inschrijvingen af <mat-icon>redo</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [disabled]="true" [expanded]="quiz.status === 3" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title><span class="number-badge mat-primary-background">3</span></mat-panel-title>
+      <mat-panel-description>
+        Inschrijvingen gesloten - geen inschrijven meer mogelijk
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="(newSubscriptions$ | async) as newSubscriptions">
+      <app-step-open [quiz]="quiz" [subscriptions]="newSubscriptions" (delete)="deleteSubscription($event)">
+      </app-step-open>
+    </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">
+        <mat-icon>undo</mat-icon> Heropen de quiz voor inschrijvingen
+      </button>
+      <button mat-flat-button color="primary" (click)="nextStep()">Open voor aanmelding <mat-icon>redo</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [disabled]="true" [expanded]="quiz.status === 4" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title><span class="number-badge mat-primary-background">4</span></mat-panel-title>
+      <mat-panel-description>
+        Dag van de quiz - deelnemers kunnen aanmelden
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="(updateSubscriptions$ | async) as updateSubscriptions">
+      <app-step-starting [quiz]="quiz" [subscriptions]="updateSubscriptions" (delete)="deleteSubscription($event)"
+        (new)="newSubscription($event)">
+      </app-step-starting>
+    </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">
+        <mat-icon>undo</mat-icon> Sluit de aanmelding af
+      </button>
+      <button mat-flat-button color="primary" (click)="nextStep()">Start de quiz <mat-icon>redo</mat-icon></button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [disabled]="true" [expanded]="quiz.status === 5" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title><span class="number-badge mat-primary-background">5</span></mat-panel-title>
+      <mat-panel-description>
+        Gestart - de quiz is van start gegaan
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="(rounds$ | async) as rounds">
+      <ng-container *ngIf="(currentStepEvent$ | async) as currentStepEvent">
+        <ng-container *ngIf="currentStepEvent && rounds">
+          <app-step-started [quiz]="quiz" [rounds]="rounds" [currentStepEvent]="currentStepEvent"
+            (next)="nextQuizStep($event)"></app-step-started>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">
+        <mat-icon>undo</mat-icon> Annuleer de start
+      </button>
+      <button mat-flat-button color="primary" (click)="nextStep()">De quiz is afgelopen <mat-icon>redo</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [disabled]="true" [expanded]="quiz.status === 6" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title><span class="number-badge mat-primary-background">6</span></mat-panel-title>
+      <mat-panel-description>
+        Afgelopen - hopelijk was het een success
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">
+        <mat-icon>undo</mat-icon> De quiz was toch niet afgelopen
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>

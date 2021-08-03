@@ -1,0 +1,75 @@
+<ng-container [ngSwitch]="currentStepEvent.status">
+  <div *ngSwitchCase="'loading'">
+    <app-loading></app-loading>
+  </div>
+
+  <div *ngSwitchCase="'error'">
+    Er is iets fout gegaan tijdens het ophalen van de quiz, probeer de pagina even te
+    refreshen.
+  </div>
+
+  <ng-container *ngSwitchDefault>
+    <div class="question" *ngIf="currentStepEvent.data.step; else starting;">
+      <ng-container [ngSwitch]="currentStepEvent.data.step.status">
+        <ng-container *ngSwitchCase="1">
+          <h2 class="mat-primary" [innerHTML]="currentStepEvent.data.step.question.title"></h2>
+          <ng-container
+            *ngIf="currentStepEvent.data.step.question?.type === questionTypes.MultipleChoise; else openAnswer">
+            <mat-radio-group [(ngModel)]="answer" [disabled]="disabled">
+              <mat-radio-button *ngFor="let answer of currentStepEvent.data.step.question?.answers"
+                [value]="answer.text">
+                {{answer.text}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </ng-container>
+          <ng-template #openAnswer>
+            <mat-form-field>
+              <mat-label>Antwoord:</mat-label>
+              <textarea [disabled]="disabled" matTextareaAutosize matAutosizeMinRows="2" matInput
+                aria-label="Geef hier je antwoord in" placeholder="Geef hier je antwoord in ..."
+                [(ngModel)]="answer"></textarea>
+            </mat-form-field>
+          </ng-template>
+          <h3 class="mat-primary">Antwoorden binnen ({{answeredCount}}/{{quiz.subscriptions.length}}):</h3>
+          <mat-progress-bar color="warn" mode="determinate" [value]="answeredPercentage"></mat-progress-bar>
+          <div class="buttons">
+            <button mat-raised-button color="primary" aria-label="geef antwoord" (click)="send()"
+              [disabled]="disabled">Verstuur antwoord
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <h2 class="mat-primary">Antwoorden</h2>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let answer of currentStepEvent.data.step.answers; let i = index;" role="listitem">
+              {{i + 1}}. {{ answer }}
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+          <h2 class="mat-primary">Antwoorden</h2>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let answer of currentStepEvent.data.step.answers; let i = index;" role="listitem">
+              {{i + 1}}. {{ answer }}
+            </mat-list-item>
+          </mat-list>
+          <h2 class="mat-primary">Scores</h2>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let score of currentStepEvent.data.step.scores; let i = index;" role="listitem">
+              {{i + 1}}. {{score.subscription.team}}: {{score.total}}
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+      </ng-container>
+    </div>
+    <ng-template #starting>
+      <h2>De quiz zal dadelijk van start gaan! <br />Bereid je al maar voor op volgende rondes:</h2>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let round of quiz.rounds; let i = index" role="listitem">
+          {{i + 1}}. {{ round.title }} ({{round.theme}})
+        </mat-list-item>
+      </mat-list>
+    </ng-template>
+  </ng-container>
+</ng-container>

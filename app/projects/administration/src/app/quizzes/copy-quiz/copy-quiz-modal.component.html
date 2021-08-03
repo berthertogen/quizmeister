@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Kopieer {{data.shortId}} - {{data.title}}</h1>
+<div mat-dialog-content>
+  <p>Welke rondes wil je mee kopiëren</p>
+  <form [formGroup]="form">
+    <div formArrayName="rounds" *ngFor="let round of data?.rounds; let i = index">
+      <mat-slide-toggle [checked]="true" color="primary" [formControlName]="i">
+        {{round.shortId}} - {{round.title}}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="annuleren()">Annuleren</button>
+  <button mat-raised-button color="primary" (click)="kopieren()">Kopiëren</button>
+</div>

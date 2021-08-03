@@ -1,0 +1,39 @@
+<app-toolbar [user]="user$ | async"></app-toolbar>
+
+<mat-form-field>
+  <input type="search" matInput placeholder="Zoeken" [formControl]="search" autocomplete="off"/>
+</mat-form-field>
+
+<ng-container *ngIf="activeQuizzes$ | async as activeQuizzes">
+  <ng-container [ngSwitch]="activeQuizzes.status">
+    <div *ngSwitchCase="'loading'">
+      <app-loading></app-loading>
+    </div>
+
+    <div *ngSwitchCase="'error'">
+      Er is iets fout gegaan tijdens het zoeken naar quizzen, probeer de pagina even te refreshen.
+    </div>
+
+    <div *ngSwitchDefault>
+      <mat-card *ngFor="let quiz of activeQuizzes.data">
+        <div class="summary">
+          <div class="title">{{ quiz.title }}</div>
+          <div class="date">{{ quiz.date | date:'dd MMMM'}}</div>
+        </div>
+        <div>{{quiz.maxSubscriptions - quiz.subscriptions.length}} plaatsen vrij</div>
+        <div class="location">te <a target="_blank"
+          href="http://maps.google.com/?q={{quiz.location}}">{{quiz.location}}</a></div>
+        <div class="button" *ngIf="!quiz.subscibed && quiz.maxSubscriptions > quiz.subscriptions.length">
+          <button *ngIf="(user$ | async) as user" mat-button color="primary" (click)="subscribe(quiz, user)" aria-label="schrijf in">Ik schrijf ons team
+            in!</button>
+        </div>
+        <div class="button" *ngIf="!quiz.subscibed && quiz.maxSubscriptions <= quiz.subscriptions.length">
+          <button mat-button *ngIf="(user$ | async) as user" color="primary" aria-label="op de wachtlijst inschrijven" (click)="subscribe(quiz, user)">Zet me op de wachtlijst</button> 
+        </div>
+        <div class="button" *ngIf="quiz.subscibed">
+          <button mat-button color="primary" [disabled]="true" aria-label="geen actie">Je neemt al deel</button>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</ng-container>

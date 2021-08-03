@@ -1,0 +1,46 @@
+<button mat-flat-button color="primary" (click)="next.emit(quiz)" *ngIf="!currentStepEvent?.step">Start de quiz en stel de eerste
+  vraag!</button>
+
+<mat-accordion>
+  <ng-container *ngFor="let round of rounds; let i = index">
+    <mat-expansion-panel [disabled]="true" hideToggle
+      [expanded]="currentStepEvent?.step?.round?.roundId === round.roundId && !answers && !score">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{round.title}} - Vragen</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <app-question-slider *ngIf="questions && currentStepEvent?.step" [quiz]="quiz" [rounds]="rounds" [currentStepEvent]="currentStepEvent" [timerStep]="timerSteps$ | async" (next)="next.emit(quiz)"></app-question-slider>
+      
+      <mat-action-row>
+        <button mat-flat-button color="primary" (click)="next.emit(quiz)" [disabled]="!lastQuestion(round)">Toon antwoorden<mat-icon>redo</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [disabled]="true" hideToggle [expanded]="currentStepEvent?.step?.round?.roundId === round.roundId && (answers || score)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{round.title}} - Antwoorden en score</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <h2 class="mat-primary">Antwoorden</h2>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let answer of currentStepEvent?.step?.answers; let i = index;" role="listitem">
+          {{i + 1}}. {{ answer }}
+        </mat-list-item>
+      </mat-list>
+
+      <h2 class="mat-primary" *ngIf="currentStepEvent?.step?.scores">Scores</h2>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let score of currentStepEvent?.step?.scores; let i = index;" role="listitem">
+          {{i + 1}}. {{score.subscription.team}}: {{score.total}}
+        </mat-list-item>
+      </mat-list>
+
+      <mat-action-row>
+        <button *ngIf="answers" mat-flat-button color="primary" (click)="next.emit(quiz)">Bereken score<mat-icon>calculate</mat-icon></button>
+        <button *ngIf="score" mat-flat-button color="primary" (click)="next.emit(quiz)">Volgende
+          ronde
+          <mat-icon>redo</mat-icon></button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>

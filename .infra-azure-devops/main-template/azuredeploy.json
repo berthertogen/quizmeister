@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "_artifactsLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+            }
+        },
+        "environment": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+            }
+        }
+    },
+    "variables": {
+        "linkedTemplates": {
+            "quizmeisterShared": "[concat(parameters('_artifactsLocation'), 'linked-templates/quizmeisterShared.json', parameters('_artifactsLocationSasToken'))]",
+            "quizmeisterAdmin": "[concat(parameters('_artifactsLocation'), 'linked-templates/quizmeisterAdmin.json', parameters('_artifactsLocationSasToken'))]",
+            "quizmeisterClient": "[concat(parameters('_artifactsLocation'), 'linked-templates/quizmeisterClient.json', parameters('_artifactsLocationSasToken'))]",
+            "quizmeisterQuizzesApi": "[concat(parameters('_artifactsLocation'), 'linked-templates/quizmeisterQuizzesApi.json', parameters('_artifactsLocationSasToken'))]" 
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "quizmeisterSharedDeployment",
+            "resourceGroup": "[resourceGroup().name]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('linkedTemplates').quizmeisterShared]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "environment":{"value": "[parameters('environment')]"}
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "quizmeisterAdminDeployment",
+            "resourceGroup": "[resourceGroup().name]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('linkedTemplates').quizmeisterAdmin]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "thumbprint":{"value": "[reference('quizmeisterSharedDeployment').outputs.thumbprint.value]"},
+                    "instrumentationKey":{"value": "[reference('quizmeisterSharedDeployment').outputs.instrumentationKey.value]"},
+                    "environment":{"value": "[parameters('environment')]"}
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "quizmeisterClientDeployment",
+            "resourceGroup": "[resourceGroup().name]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('linkedTemplates').quizmeisterClient]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "thumbprint":{"value": "[reference('quizmeisterSharedDeployment').outputs.thumbprint.value]"},
+                    "environment":{"value": "[parameters('environment')]"}
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "quizmeisterQuizzesApiDeployment",
+            "resourceGroup": "[resourceGroup().name]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('linkedTemplates').quizmeisterQuizzesApi]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "thumbprint":{"value": "[reference('quizmeisterSharedDeployment').outputs.thumbprint.value]"},
+                    "instrumentationKey":{"value": "[reference('quizmeisterSharedDeployment').outputs.instrumentationKey.value]"},
+                    "environment":{"value": "[parameters('environment')]"}
+                }
+            }
+        }
+    ]
+}

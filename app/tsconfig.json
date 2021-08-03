@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@administration/*": [
+        "projects/administration/src/app/*"
+      ],
+      "@client/*": [
+        "projects/client/src/app/*"
+      ],
+      "@jury/*": [
+        "projects/jury/src/app/*"
+      ],
+      "@presentation/*": [
+        "projects/presentation/src/app/*"
+      ],
+      "@domain/*": [
+        "projects/domain/src/lib/*"
+      ],
+      "domain": [
+        "dist/domain/domain",
+        "dist/domain"
+      ]
+    }
+  }
+}

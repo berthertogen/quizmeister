@@ -1,0 +1,15 @@
+<mat-accordion [formGroup]="answerForm" [multi]="true" cdkDropList (cdkDropListDropped)="drop($event)">
+  <mat-expansion-panel formArray="answers" [expanded]="true" *ngFor="let answer of answers.controls; let i = index;" cdkDrag>
+    <div attr.data-test-id="input-answer-{{i}}" class="controls" [formGroup]="answer">
+      <input type="hidden" formControlName="answerId">
+      <mat-form-field>
+        <textarea formControlName="text" type="text" rows="5" matInput placeholder="Antwoord"></textarea>
+      </mat-form-field>
+      <mat-slide-toggle formControlName="correct" color="primary">Correct antwoord</mat-slide-toggle>
+    </div>
+    <button data-test-id="button-delete-answer" *ngIf="options.allowMultiple" type="button" mat-raised-button color="basic" (click)="delete(i)" [disabled]="answers.controls.length <= 1">Antwoord verwijderen</button>
+  </mat-expansion-panel>
+</mat-accordion>
+<div>
+  <button data-test-id="button-add-answer" *ngIf="options.allowMultiple" class="add" type="button" mat-raised-button color="basic" (click)="add()">Antwoord toevoegen</button>
+</div>

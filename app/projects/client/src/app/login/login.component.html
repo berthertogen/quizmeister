@@ -1,0 +1,13 @@
+<h3>Je bent nog niet gekend op dit toestel. Vul onderstaande aan om jou inschrijvingen op te halen.</h3>
+<mat-form-field>
+  <mat-label>Email verantwoordelijke</mat-label>
+  <input type="email" matInput placeholder="email" [formControl]="email" required />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Team</mat-label>
+  <input type="text" matInput placeholder="team" [formControl]="team" required />
+</mat-form-field>
+<mat-slide-toggle color="primary" [formControl]="rememberme">
+  Onthoud mijn gegevens
+</mat-slide-toggle>
+<button mat-button color="primary" (click)="continue()" [disabled]="email.invalid || team.invalid" aria-label="doorgaan">Doorgaan</button>

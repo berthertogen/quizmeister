@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizmeisterApi", "Api\QuizmeisterApi.csproj", "{3B9F13F4-B4B8-4156-AEFC-EA213C083A77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationTool", "MigrationTool\MigrationTool.csproj", "{AC3A5BE7-F1B8-4D2D-B5CC-38AA42D4FBF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A52E8D58-9940-436F-9638-69C8B96E6015}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		devops-templates\azure-pipelines-master.yaml = devops-templates\azure-pipelines-master.yaml
+		devops-templates\azure-pipelines-pr.yaml = devops-templates\azure-pipelines-pr.yaml
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizmeisterApi.Tests", "QuizmeisterApi.Tests\QuizmeisterApi.Tests.csproj", "{608FC5B4-A09C-4658-A717-6BF8A2F69478}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSeeder", "DatabaseSeeder\DatabaseSeeder.csproj", "{DF8EC18F-3AD9-4121-A27D-0881DDC63D22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B9F13F4-B4B8-4156-AEFC-EA213C083A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9F13F4-B4B8-4156-AEFC-EA213C083A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9F13F4-B4B8-4156-AEFC-EA213C083A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9F13F4-B4B8-4156-AEFC-EA213C083A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3A5BE7-F1B8-4D2D-B5CC-38AA42D4FBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3A5BE7-F1B8-4D2D-B5CC-38AA42D4FBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3A5BE7-F1B8-4D2D-B5CC-38AA42D4FBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3A5BE7-F1B8-4D2D-B5CC-38AA42D4FBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608FC5B4-A09C-4658-A717-6BF8A2F69478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608FC5B4-A09C-4658-A717-6BF8A2F69478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608FC5B4-A09C-4658-A717-6BF8A2F69478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608FC5B4-A09C-4658-A717-6BF8A2F69478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF8EC18F-3AD9-4121-A27D-0881DDC63D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF8EC18F-3AD9-4121-A27D-0881DDC63D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF8EC18F-3AD9-4121-A27D-0881DDC63D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF8EC18F-3AD9-4121-A27D-0881DDC63D22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D9D2813-1D7A-45D5-A306-E02EF1913DF9}
+	EndGlobalSection
+EndGlobal

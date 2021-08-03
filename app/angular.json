@@ -1,0 +1,514 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "administration": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/administration",
+      "sourceRoot": "projects/administration/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/administration",
+            "index": "projects/administration/src/index.html",
+            "main": "projects/administration/src/main.ts",
+            "polyfills": "projects/administration/src/polyfills.ts",
+            "tsConfig": "projects/administration/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/administration/src/manifest.webmanifest",
+              "projects/administration/src/assets",
+              {
+                "glob": "**/*",
+                "input": "shared/statics/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "shared/assets/",
+                "output": "assets/"
+              },
+              {
+                "input": "shared/environments/local/",
+                "output": "/",
+                "glob": "env.js"
+              }
+            ],
+            "styles": [
+              "projects/administration/src/styles.sass"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared/styles"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/administration/src/environments/environment.ts",
+                  "with": "projects/administration/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "assets": [
+                "projects/administration/src/manifest.webmanifest",
+                "projects/administration/src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "shared/statics/",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "shared/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "input": "shared/environments/prod/",
+                  "output": "/",
+                  "glob": "env.js"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "administration:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "administration:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "administration:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/administration/**/*.ts",
+              "projects/administration/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "client": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/client",
+      "sourceRoot": "projects/client/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/client",
+            "index": "projects/client/src/index.html",
+            "main": "projects/client/src/main.ts",
+            "polyfills": "projects/client/src/polyfills.ts",
+            "tsConfig": "projects/client/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/client/src/manifest.webmanifest",
+              "projects/client/src/assets",
+              {
+                "glob": "**/*",
+                "input": "shared/statics/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "shared/assets/",
+                "output": "assets/"
+              },
+              {
+                "input": "shared/environments/local/",
+                "output": "/",
+                "glob": "env.js"
+              }
+            ],
+            "styles": [
+              "projects/client/src/styles.sass"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared/styles"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/client/src/environments/environment.ts",
+                  "with": "projects/client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/client/ngsw-config.json",
+              "assets": [
+                "projects/client/src/manifest.webmanifest",
+                "projects/client/src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "shared/statics/",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "shared/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "input": "shared/environments/prod/",
+                  "output": "/",
+                  "glob": "env.js"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "client:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "client:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/client/**/*.ts",
+              "projects/client/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "presentation": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/presentation",
+      "sourceRoot": "projects/presentation/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/presentation",
+            "index": "projects/presentation/src/index.html",
+            "main": "projects/presentation/src/main.ts",
+            "polyfills": "projects/presentation/src/polyfills.ts",
+            "tsConfig": "projects/presentation/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/presentation/src/manifest.webmanifest",
+              "projects/presentation/src/assets",
+              {
+                "glob": "**/*",
+                "input": "shared/statics/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "shared/assets/",
+                "output": "assets/"
+              },
+              {
+                "input": "shared/environments/prod/",
+                "output": "/",
+                "glob": "env.js"
+              }
+            ],
+            "styles": [
+              "projects/presentation/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared/styles"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/presentation/src/environments/environment.ts",
+                  "with": "projects/presentation/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "assets": [
+                "projects/presentation/src/manifest.webmanifest",
+                "projects/presentation/src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "shared/statics/",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "shared/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "input": "shared/environments/local/",
+                  "output": "/",
+                  "glob": "env.js"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "presentation:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "presentation:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "presentation:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/presentation/**/*.ts",
+              "projects/presentation/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "jury": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/jury",
+      "sourceRoot": "projects/jury/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/jury",
+            "index": "projects/jury/src/index.html",
+            "main": "projects/jury/src/main.ts",
+            "polyfills": "projects/jury/src/polyfills.ts",
+            "tsConfig": "projects/jury/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/jury/src/favicon.ico",
+              "projects/jury/src/assets",
+              {
+                "input": "shared/environments/prod/",
+                "output": "/",
+                "glob": "env.js"
+              }
+            ],
+            "styles": [
+              "projects/jury/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared/styles"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/jury/src/environments/environment.ts",
+                  "with": "projects/jury/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "jury:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "jury:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "jury:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/jury/**/*.ts",
+              "projects/jury/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "domain": {
+      "projectType": "library",
+      "root": "projects/domain",
+      "sourceRoot": "projects/domain/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/domain/tsconfig.lib.json",
+            "project": "projects/domain/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/domain/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/domain/**/*.ts",
+              "projects/domain/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "administration"
+}

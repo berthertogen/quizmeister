@@ -1,0 +1,53 @@
+<form (submit)="onSubmit()" [formGroup]="roundForm" autocomplete="off">
+  <mat-form-field>
+    <input type="text" matInput placeholder="Titel" formControlName="title" required />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" placeholder="Thema" matInput formControlName="theme" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of themes" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea type="text" matInput placeholder="Opmerking" formControlName="remark"></textarea>
+  </mat-form-field>
+
+  <div class="vragen">
+    <div class="list">
+      <h2 class="mat-h2">Geselecteerde vragen ({{questionList.length}})</h2>
+      <div cdkDropList #geselecteerdeVragenList="cdkDropList" [cdkDropListData]="questionList"
+        [cdkDropListConnectedTo]="[vragenList]" (cdkDropListDropped)="drop($event)">
+        <div class="box" *ngFor="let question of questionList; let i = index" cdkDrag>
+          <mat-icon aria-hidden="false" aria-label="drag indicator icon" class="draggable">drag_indicator</mat-icon>
+          <span>{{i+1}}. {{question.shortId}} - {{question.title}}</span>
+          <button type="button" mat-icon-button color="basic" (click)="deselect(question)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="list">
+      <h2 class="mat-h2">Vragen</h2>
+      <mat-form-field>
+        <input type="search" matInput placeholder="Zoeken" [formControl]="search" />
+      </mat-form-field>
+      <div cdkDropList #vragenList="cdkDropList" [cdkDropListData]="questions"
+        [cdkDropListConnectedTo]="[geselecteerdeVragenList]" (cdkDropListDropped)="drop($event)">
+        <div class="box" *ngFor="let question of questions" cdkDrag>
+          <button type="button" mat-icon-button color="primary" class="plus" (click)="select(question)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <span>{{question.shortId}} - {{question.title}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button mat-button [routerLink]="cancelRoute">Annuleren</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!roundForm.valid">Opslaan</button>
+  </div>
+</form>

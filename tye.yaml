@@ -1,0 +1,28 @@
+name: quizmeister
+services:
+- name: quizmeister-api
+  project: ./service/Api/QuizmeisterApi.csproj
+  bindings:
+  - port: 5003
+    protocol: http
+  env:
+  - name: "ASPNETCORE_ENVIRONMENT"
+    value: "dev"
+  liveness:
+    http:
+      path: /health
+
+- name: quizmeister-front-admin
+  workingDirectory: ./app
+  executable: "cmd"
+  args: "/c npm run start:admin"
+
+- name: quizmeister-front-client
+  workingDirectory: ./app
+  executable: "cmd"
+  args: "/c npm run start:client"
+
+- name: quizmeister-front-present
+  workingDirectory: ./app
+  executable: "cmd"
+  args: "/c npm run start:present"

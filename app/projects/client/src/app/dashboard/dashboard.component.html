@@ -1,0 +1,15 @@
+<img src="../../assets/icons/android-chrome-192x192.png" alt="Quizmeister" />
+
+<ng-container *ngIf="user$ | async as user">
+  <ng-container [ngSwitch]="user.status">
+    <div *ngSwitchCase="'loading'">
+      <app-loading></app-loading>
+    </div>
+
+    <div *ngSwitchCase="'error'">
+      Er is iets fout gegaan tijdens het ophalen van je gebruiker, probeer de pagina even te refreshen.
+    </div>
+    <p>Hallo {{user.data.email}} van team {{user.data.team}}</p>
+    <app-buttons *ngSwitchDefault [user]="user.data"></app-buttons>
+  </ng-container>
+</ng-container>

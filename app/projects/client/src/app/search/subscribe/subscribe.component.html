@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Inschrijven voor {{data.quiz.shortId}} - {{data.quiz.title}}</h1>
+<div mat-dialog-content>
+  <p>Bevestig je inschrijving voor</p>
+  <p>{{data.quiz.shortId}} - {{data.quiz.title}}</p>
+  <p> op {{data.quiz.date | date:"dd-MM-yyyy"}}</p>
+  <mat-form-field>
+    <mat-label>Email verantwoordelijke</mat-label>
+    <input type="email" matInput placeholder="email" [formControl]="email" required/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Team</mat-label>
+    <input type="text" matInput placeholder="team" [formControl]="team" required/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Opmerking</mat-label>
+    <textarea type="text" matInput placeholder="remark" [formControl]="remark"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()" aria-label="annuleren">Annuleren</button>
+  <button mat-raised-button color="primary" (click)="confirm()" [disabled]="email.invalid || team.invalid" aria-label="bevestigen">Bevestigen</button>
+</div>

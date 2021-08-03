@@ -1,0 +1,36 @@
+<ng-container *ngIf="quiz$ | async as quiz">
+  <ng-container [ngSwitch]="quiz.status">
+    <div *ngSwitchCase="'loading'">
+      <app-loading></app-loading>
+    </div>
+
+    <div *ngSwitchCase="'error'">
+      Er is iets fout gegaan tijdens het ophalen van de quiz, probeer de pagina even te
+      refreshen.
+    </div>
+
+    <div class="quiz" *ngSwitchDefault>
+      <ng-container [ngSwitch]="quiz.data.status">
+        <ng-container *ngSwitchCase="4">
+          <h1>De quiz zal dadelijk starten ;)</h1>
+          <ul>
+            <li *ngFor="let subs of quiz.data.subscriptions">{{ subs.team }} - {{ subs.status }}</li>
+          </ul>
+        </ng-container>
+        <ng-container *ngSwitchCase="5">
+          <p>
+            Quiz is begonnen
+          </p>
+          <ng-container *ngIf="currentStepEvent$ | async as currentStepEvent">
+            {{ currentStepEvent | json }}
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <p>
+            Quiz is nog niet begonnen
+          </p>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-container>

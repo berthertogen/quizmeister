@@ -1,0 +1,5 @@
+<div data-test-id="component-dashboard">
+  <app-quiz-selector [quizzes]="quizzes$ | async" (searching)="searching($event)" (selected)="selected($event)">
+  </app-quiz-selector>
+  <app-quiz-stepper *ngIf="(quiz$ | async) as quiz" [quiz]="quiz" (step)="step($event)"></app-quiz-stepper>
+</div>

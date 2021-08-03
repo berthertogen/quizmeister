@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "_artifactsLocation": {
+            "value": ""
+        },
+        "_artifactsLocationSasToken": {
+            "value": ""
+        },
+        "environment": {
+            "value": ""
+        }
+    }
+}

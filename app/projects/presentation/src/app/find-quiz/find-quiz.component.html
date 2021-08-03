@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" (keydown.enter)="start()">
+  <mat-label>Quiz nummer</mat-label>
+  <input type="text" matInput [formControl]="shortId" required />
+  <mat-icon matSuffix (click)="start()">play_arrow</mat-icon>
+</mat-form-field>

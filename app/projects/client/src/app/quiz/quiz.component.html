@@ -1,0 +1,32 @@
+<app-toolbar [user]="user$ | async"></app-toolbar>
+<ng-container *ngIf="quiz$ | async as quiz">
+  <ng-container [ngSwitch]="quiz.status">
+    <div *ngSwitchCase="'loading'">
+      <app-loading></app-loading>
+    </div>
+
+    <div *ngSwitchCase="'error'">
+      Er is iets fout gegaan tijdens het ophalen van de quiz, probeer de pagina even te
+      refreshen.
+    </div>
+
+    <div class="quiz" *ngSwitchDefault>
+      <ng-container [ngSwitch]="quiz.data.status">
+        <ng-container *ngSwitchCase="4">
+          <app-starting [quiz]="quiz.data" [user]="user$ | async" (participate)="participate($event)"></app-starting>
+        </ng-container>
+        <ng-container *ngSwitchCase="5">
+          <ng-container *ngIf="currentStepEvent$ | async as currentStepEvent">
+            <app-started [quiz]="quiz.data" [currentStepEvent]="currentStepEvent" (sendAnswer)="sendAnswer($event)" [user]="user$ | async"></app-started>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <p>
+            Je neemt momenteel niet deel aan een quiz die gestart is!
+            <a routerLink="/dashboard">Klik hier</a> om terug naar het dashboard te gaan.
+          </p>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-container>

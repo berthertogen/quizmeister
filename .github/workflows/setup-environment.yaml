@@ -1,0 +1,12 @@
+on: [push]
+name: Deploy to NAS
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    env: 
+      QUIZMEISTER_SQL_PASSWORD: ${{ secrets.QUIZMEISTER_SQL_PASSWORD }}
+      QUIZMEISTER_SIGNALR_CONNECTIONSTRING: ${{ secrets.QUIZMEISTER_SIGNALR_CONNECTIONSTRING }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the docker-compose stack
+      run: docker-compose up --build --detach

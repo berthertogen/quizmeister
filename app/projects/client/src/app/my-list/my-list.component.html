@@ -1,0 +1,41 @@
+<app-toolbar [user]="user$ | async"></app-toolbar>
+
+
+<ng-container *ngIf="subscriptions$ | async as subscriptions">
+  <ng-container [ngSwitch]="subscriptions.status">
+    <div *ngSwitchCase="'loading'">
+      <app-loading></app-loading>
+    </div>
+
+    <div *ngSwitchCase="'error'">
+      Er is iets fout gegaan tijdens het ophalen van de quizzen waar je aan deelneemt, probeer de pagina even te
+      refreshen.
+    </div>
+
+    <div *ngSwitchDefault>
+      <mat-card *ngFor="let subscription of subscriptions.data">
+        <div class="summary">
+          <div class="title">{{ subscription.quiz.title }}</div>
+          <div class="date">{{ subscription.quiz.date | date:'dd MMMM'}}</div>
+        </div>
+        <div class="location">
+          te <a target="_blank"
+            href="http://maps.google.com/?q={{subscription.quiz.location}}">{{subscription.quiz.location}}</a>
+        </div>
+        <div class="button">
+          <button *ngIf="subscription.quiz.status === 5" mat-flat-button color="primary" (click)="quiz(subscription)"
+            aria-label="start quizzen">Start met
+            quizzen!</button>
+          <button *ngIf="subscription.quiz.status === 4 && subscription.status === 1" mat-flat-button color="primary"
+            (click)="participate(subscription)" aria-label="start deelname">Start
+            deelname!</button>
+            <button *ngIf="subscription.quiz.status === 4 && subscription.status === 2" mat-button color="primary"
+              (click)="quiz(subscription)" aria-label="start deelname">Open de quiz</button>
+          <button *ngIf="subscription.quiz.status < 5" mat-button color="primary" (click)="unsubscribe(subscription)"
+            [disabled]="subscription.status === 2" aria-label="uitschrijven">We komen toch
+            niet.</button>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</ng-container>

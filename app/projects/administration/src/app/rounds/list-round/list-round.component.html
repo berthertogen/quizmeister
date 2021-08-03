@@ -1,0 +1,28 @@
+<div data-test-id="component-rounds">
+  <mat-form-field>
+    <input type="search" matInput placeholder="Zoeken" [formControl]="search" autocomplete="off"/>
+  </mat-form-field>
+
+  <ng-container *ngIf="rounds$ | async as rounds">
+    <ng-container [ngSwitch]="rounds.status">
+      <div *ngSwitchCase="'loading'">
+        <app-loading></app-loading>
+      </div>
+
+      <div *ngSwitchCase="'error'">
+        Er is iets fout gegaan tijdens het ophalen van de quizzen waar je aan deelneemt, probeer de pagina even te
+        refreshen.
+      </div>
+
+      <div *ngSwitchDefault>
+        <app-table-round [rounds]="rounds.data" (copyRound)="copy($event)" (deleteRound)="delete($event)">
+        </app-table-round>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <button class="add" mat-raised-button color="primary" routerLink="../add">
+    <mat-icon>add</mat-icon>
+    <span>Toevoegen</span>
+  </button>
+</div>

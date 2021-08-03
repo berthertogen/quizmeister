@@ -1,0 +1,22 @@
+<div *ngIf="(subscriptions | subscriptionStatus: [subscriptionStatus.new, subscriptionStatus.joined]) as newSubscriptions">
+  <p>Ingeschreven teams ({{newSubscriptions?.length}}/{{quiz.maxSubscriptions}}):</p>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let subscription of newSubscriptions" role="listitem">
+      <button mat-icon-button color="warn" (click)="delete.emit(subscription)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      {{ subscription.team }} ({{subscription.email}})
+    </mat-list-item>
+  </mat-list>
+</div>
+<div *ngIf="(subscriptions | subscriptionStatus: [subscriptionStatus.queued]) as queuedSubscriptions">
+  <p>Teams op de wachtlijst ({{queuedSubscriptions.length}}):</p>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let subscription of queuedSubscriptions" role="listitem">
+      <button mat-icon-button color="warn" (click)="delete.emit(subscription)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      {{ subscription.team }} ({{subscription.email}})
+    </mat-list-item>
+  </mat-list>
+</div>

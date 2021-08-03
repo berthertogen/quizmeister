@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="example-toolbar">
+  <button mat-icon-button (click)="snav.toggle()" data-test-id="button-show-menu"><mat-icon>menu</mat-icon></button>
+  <h1 class="app-name">Quizmeister</h1>
+  <app-breadcrumb></app-breadcrumb>
+</mat-toolbar>
+<mat-sidenav-container class="example-sidenav-container">
+  <mat-sidenav #snav [mode]="'over'">
+    <mat-nav-list>
+      <a mat-list-item data-test-id="link-menu-item-dashboard" routerLink="dashboard" routerLinkActive="active" (click)="snav.toggle()">Dashboard</a>
+      <a mat-list-item data-test-id="link-menu-item-quizzes" routerLink="quizzes" routerLinkActive="active" (click)="snav.toggle()">Quizzen</a>
+      <a mat-list-item data-test-id="link-menu-item-rounds" routerLink="rounds" routerLinkActive="active" (click)="snav.toggle()">Rondes</a>
+      <a mat-list-item data-test-id="link-menu-item-questions" routerLink="questions" routerLinkActive="active" (click)="snav.toggle()">Vragen</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

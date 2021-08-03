@@ -1,0 +1,22 @@
+<h1>Welkom op {{quiz.title}}</h1>
+<p>We zijn de quiz aan het opstarten, volgende team hebben zich al aangemeld:</p>
+<mat-list role="list">
+  <mat-list-item *ngFor="let subscription of quiz.subscriptions | subscriptionStatus: [2]" role="listitem">
+    {{ subscription.team }} ({{subscription.email}})
+  </mat-list-item>
+</mat-list>
+<p>We wachten nog op:</p>
+<mat-list role="list">
+  <mat-list-item *ngFor="let subscription of quiz.subscriptions | subscriptionStatus: [1]" role="listitem">
+    {{ subscription.team }} ({{subscription.email}})
+    <button *ngIf="subscription.email === user.email && subscription.status === 1" mat-flat-button color="primary"
+            (click)="participate.emit(subscription)" aria-label="start deelname">Start
+            deelname!</button>
+  </mat-list-item>
+</mat-list>
+<p>Wachtrij:</p>
+<mat-list role="list">
+  <mat-list-item *ngFor="let subscription of quiz.subscriptions | subscriptionStatus: [4]" role="listitem">
+    {{ subscription.team }} ({{subscription.email}})
+  </mat-list-item>
+</mat-list>

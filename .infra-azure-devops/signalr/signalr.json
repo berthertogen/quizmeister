@@ -1,0 +1,40 @@
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "name": "quizmeister",
+            "type": "Microsoft.SignalRService/SignalR",
+            "apiVersion": "2020-05-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "features": [
+                    {
+                        "flag": "ServiceMode",
+                        "value": "Default"
+                    },
+                    {
+                        "flag": "EnableConnectivityLogs",
+                        "value": "true"
+                    }
+                ]
+            },
+            "sku": {
+                "name": "Free_F1",
+                "tier": "Free",
+                "capacity": 1
+            },
+            "dependsOn": [],
+            "tags": {}
+        }
+    ],
+    "outputs": {
+    },
+    "functions": [
+    ]
+}

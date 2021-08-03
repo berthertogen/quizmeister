@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="question">
+    <ng-container *ngIf="previousQuestion">
+      <h3 class="center">{{previousQuestion?.title}} ({{currentQuestionIndex}}/{{questionCount}})</h3>
+      <div class="info">
+        <small *ngIf="previousQuestion?.remark">remark: {{previousQuestion?.remark}}</small><br />
+        <small>type: {{displayQuestionTypes(previousQuestion?.type)}}</small><br />
+        <small>score: {{displayScoringTypes(previousQuestion?.scoring?.type)}}</small>
+      </div>
+      <h3 class="mat-primary">Antwoorden binnen ({{previousAnsweredCount}}/{{quiz.subscriptions.length}}):</h3>
+      <mat-progress-bar color="warn" mode="determinate" [value]="previousAnsweredPercentage"></mat-progress-bar>
+    </ng-container>
+  </div>
+  <mat-card class="question">
+    <h2 class="mat-primary" [innerHTML]="displayQuestionTitle()"></h2>
+    
+    <div class="info">
+      <small *ngIf="question?.remark">remark: {{question?.remark}}</small><br />
+      <small>type: {{displayQuestionTypes(question?.type)}}</small><br />
+      <small>score: {{displayScoringTypes(question?.scoring?.type)}}</small>
+    </div>
+    <ng-container *ngIf="question?.type === questionTypes.multipleChoise">
+      <h3 class="mat-primary">Antwoorden:</h3>
+      <mat-radio-group>
+        <mat-radio-button *ngFor="let answer of question?.answers" [value]="answer" [disabled]="true">
+          {{answer.text}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </ng-container>
+    
+    <div class="timing">
+      <h3 class="mat-primary">Tijdslimiet:</h3>
+      <ng-container *ngIf="question?.scoring?.type === scoringTypes.timeToComplete; else noTimer">
+        <mat-progress-bar *ngIf="timerStep && timerStep.step.percentage > 0; else timerExpired" color="warn" mode="determinate"
+          [value]="timerStep.step.percentage"></mat-progress-bar>
+        <ng-template #timerExpired><small>tijdslimiet is verstreken</small></ng-template>
+      </ng-container>
+      <ng-template #noTimer><small>geen timer voor deze vraag</small></ng-template>
+    </div>
+    
+    <h3 class="mat-primary">Antwoorden binnen ({{answeredCount}}/{{quiz.subscriptions.length}}):</h3>
+    <mat-progress-bar color="warn" mode="determinate" [value]="answeredPercentage"></mat-progress-bar>
+  </mat-card>
+  <div class="question">
+    <ng-container *ngIf="nextQuestion">
+      <h3 class="center">{{nextQuestion?.title}}({{currentQuestionIndex + 2}}/{{questionCount}})</h3>
+      <div class="info">
+        <small *ngIf="nextQuestion?.remark">remark: {{nextQuestion?.remark}}</small><br />
+        <small>type: {{displayQuestionTypes(nextQuestion?.type)}}</small><br />
+        <small>score: {{displayScoringTypes(nextQuestion?.scoring?.type)}}</small>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div class="row">
+  <button mat-icon-button color="primary" [disabled]="!nextQuestion" (click)="next.emit()">
+    <mat-icon>forward</mat-icon>
+  </button>
+</div>

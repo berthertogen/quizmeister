@@ -1,0 +1,9 @@
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="Zoeken een quiz" [matAutocomplete]="auto" [formControl]='search'>
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let quiz of quizzes" [value]="quiz">
+    <span>{{ quiz.shortId }} - {{ quiz.title }} ({{displayQuizStatus(quiz.status)}})</span>
+  </mat-option>
+</mat-autocomplete>
