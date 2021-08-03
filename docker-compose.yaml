@@ -1,7 +1,8 @@
 version: "3.9"
 services:
   quizmeister-service:
-    depends_on: quizmeister-sql
+    depends_on: 
+      - quizmeister-sql
     build: ./service
     ports:
       - "8091:5003"
