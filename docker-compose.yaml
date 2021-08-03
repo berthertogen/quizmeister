@@ -5,11 +5,12 @@ services:
       - quizmeister-sql
     build: ./service
     ports:
-      - "8091:5003"
+      - "8091:5000"
     environment:
       QUIZMEISTER_ConnectionStrings__QuizmeisterContext: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18:8092"
       QUIZMEISTER_ConnectionStrings__QuizmeisterSignalR: "${QUIZMEISTER_SIGNALR_CONNECTIONSTRING}"
       QUIZMEISTER_ApplicationInsights__InstrumentationKey: ""
+      ASPNETCORE_URLS: http://+:5000
 
   quizmeister-sql:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -21,3 +22,10 @@ services:
       MSSQL_PID: Developer
       SA_PASSWORD: ${QUIZMEISTER_SQL_PASSWORD}
       ACCEPT_EULA: Y
+    deploy:
+      resources:
+        limits:
+          memory: 2000M
+        reservations:
+          memory: 1000M
+  
