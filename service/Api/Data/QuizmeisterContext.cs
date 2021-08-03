@@ -4,10 +4,7 @@ namespace Quizmeister.Data
 {
     public class QuizmeisterContext : DbContext
     {
-        public QuizmeisterContext(DbContextOptions<QuizmeisterContext> options) :
-            base(options)
-        {
-        }
+        public QuizmeisterContext(DbContextOptions<QuizmeisterContext> options) : base(options) { }
 
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<QuizRound> QuizzesRounds { get; set; }
