@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
@@ -15,8 +16,8 @@ namespace MigrationTool
               .AddJsonFile("appsettings.dev.json", true)
               .AddEnvironmentVariables(prefix: "QUIZMEISTER_")
               .Build();
-            Console.WriteLine($"Applying migrations. ({configuration.GetSection("ConnectionStrings").GetValue<string>("QuizmeisterContext")})");
 
+            Console.WriteLine($"Applying migrations. ({configuration.GetSection("ConnectionStrings").GetValue<string>("QuizmeisterContext")})");
             Console.WriteLine("Testing connection ...");
 
             int maxCount = 100;
