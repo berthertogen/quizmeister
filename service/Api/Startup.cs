@@ -33,22 +33,16 @@ namespace Quizmeister
 
             services.AddApplicationInsightsTelemetry();
 
-            if (Environment.IsEnvironment("dev"))
-            {
-                services.AddCors(c =>
-                    c.AddPolicy(
-                        MyAllowSpecificOrigins,
-                        b => b
-                            .WithOrigins(
-                              "https://localhost:4200",
-                              "https://localhost:4201",
-                              "https://localhost:4202")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowCredentials()
-                        )
-                    );
-            }
+            services.AddCors(c =>
+                c.AddPolicy(
+                    MyAllowSpecificOrigins,
+                    b => b
+                        .WithOrigins(Configuration.GetValue<string[]>("CorsOrigins"))
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                    )
+                );
 
             services.AddTransient<QuizRepository>();
             services.AddTransient<RoundRepository>();
