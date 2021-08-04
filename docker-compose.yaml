@@ -36,3 +36,17 @@ services:
       dockerfile: Dockerfile-administration
     ports:
       - "8090:80"
+
+  quizmeister-client-app:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile-client
+    ports:
+      - "8093:80"
+
+  quizmeister-presentation-app:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile-presentation
+    ports:
+      - "8094:80"
