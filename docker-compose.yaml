@@ -33,20 +33,23 @@ services:
   quizmeister-administrator-app:
     build: 
       context: ./app
-      dockerfile: Dockerfile-administration
+      args: 
+        project: administration
     ports:
       - "8090:80"
 
   quizmeister-client-app:
     build: 
       context: ./app
-      dockerfile: Dockerfile-client
+      args: 
+        project: client
     ports:
       - "8093:80"
 
   quizmeister-presentation-app:
     build: 
       context: ./app
-      dockerfile: Dockerfile-presentation
+      args: 
+        project: presentation
     ports:
       - "8094:80"
