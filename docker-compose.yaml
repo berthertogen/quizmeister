@@ -36,7 +36,7 @@ services:
       args: 
         project: administration
     ports:
-      - "8090:80"
+      - "8090:8080"
 
   quizmeister-client-app:
     build: 
@@ -44,7 +44,7 @@ services:
       args: 
         project: client
     ports:
-      - "8093:80"
+      - "8093:8080"
 
   quizmeister-presentation-app:
     build: 
@@ -52,4 +52,4 @@ services:
       args: 
         project: presentation
     ports:
-      - "8094:80"
+      - "8094:8080"

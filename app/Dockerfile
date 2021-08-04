@@ -7,6 +7,6 @@ RUN npm ci
 COPY . .
 RUN npm run build:$project
 
-FROM nginx:alpine
+FROM trion/nginx-angular:latest
 ARG project
 COPY --from=build /app/dist/$project/ /usr/share/nginx/html/
