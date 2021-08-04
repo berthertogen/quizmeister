@@ -67,10 +67,10 @@ namespace Quizmeister
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(MyAllowSpecificOrigins);
             if (env.IsEnvironment("dev"))
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(MyAllowSpecificOrigins);
             }
             else
             {
