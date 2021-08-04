@@ -8,4 +8,5 @@ COPY . .
 RUN npm run build:$project
 
 FROM nginx:alpine
-COPY --from=build /app/dist/$project /usr/share/nginx/html/
+ARG project
+COPY --from=build /app/dist/$project/ /usr/share/nginx/html/
