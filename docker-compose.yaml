@@ -1,8 +1,6 @@
 version: "3.9"
 services:
   quizmeister-service:
-    depends_on: 
-      - quizmeister-sql
     build: 
       context: ./service
       args:
@@ -32,3 +30,9 @@ services:
         reservations:
           memory: 1000M
   
+  quizmeister-administrator-app:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile-administration
+    ports:
+      - "8090:80"

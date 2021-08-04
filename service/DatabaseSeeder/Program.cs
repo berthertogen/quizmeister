@@ -66,6 +66,7 @@ namespace DatabaseSeeder
 
             var questions = await GetQuestions(categoryId, numberOfQuestions);
             string connectionString = GetConnectionString();
+            Console.WriteLine($"Writing to : {connectionString}");
             using (var serviceProvider = BuildServiceProvider(connectionString))
             {
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
