@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
@@ -33,11 +35,16 @@ namespace Quizmeister
 
             services.AddApplicationInsightsTelemetry();
 
+            var origins = Configuration
+                .GetSection("CorsOrigins")
+                .GetChildren()
+                .Select(x => x.Value)
+                .ToArray();
             services.AddCors(c =>
                 c.AddPolicy(
                     MyAllowSpecificOrigins,
                     b => b
-                        .WithOrigins(Configuration.GetValue<string[]>("CorsOrigins"))
+                        .WithOrigins(origins)
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
