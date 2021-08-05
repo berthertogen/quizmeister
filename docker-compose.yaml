@@ -3,8 +3,6 @@ services:
   quizmeister-service:
     build: 
       context: ./service
-      args:
-        QuizmeisterConnectionString: "Persist Security Info=False;User ID=sa;Password=${QUIZMEISTER_SQL_PASSWORD};Initial Catalog=Quizmeister;Server=192.168.1.18,8092"
     ports:
       - "8091:5000"
     environment:

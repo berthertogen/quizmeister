@@ -12,6 +12,8 @@ services:
           memory: 2000M
         reservations:
           memory: 1000M
+    logging:
+      driver: json-file
 
   quizmeister-service:
     depends_on:
@@ -23,7 +25,9 @@ services:
       QUIZMEISTER_ConnectionStrings__QuizmeisterSignalR: "Endpoint=https://tijdelijke.service.signalr.net;AccessKey=MxSayPqK0N5ZnIJYIVql6tOeIZn3DmhqNi6nDWs+aZQ=;Version=1.0;"
       QUIZMEISTER_ApplicationInsights__InstrumentationKey: ""
       ASPNETCORE_URLS: "http://+:80"
-        
+    logging:
+      driver: json-file
+          
   quizmeister-integration-test:
     depends_on:
       - quizmeister-sql
@@ -31,3 +35,6 @@ services:
     build:
       context: ./service
       dockerfile: Dockerfile-integration-tests
+    logging:
+      driver: json-file
+  
