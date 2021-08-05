@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "wait-on -i 1000 -v http://quizmeister-service/health && jest"
+    "test": "wait-on -i 1000 -v http://quizmeister-service/health && jest",
+    "fulltest": ""
   },
   "repository": {
     "type": "git",

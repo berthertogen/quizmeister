@@ -35,6 +35,8 @@ services:
     build:
       context: ./service
       dockerfile: Dockerfile-integration-tests
+    environment:
+      SERVICE_URL: "http://quizmeister-service"
     logging:
       driver: json-file
   

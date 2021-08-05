@@ -1,0 +1,19 @@
+{
+  "name": "quizmeister",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "docker-compose -f docker-compose-integration-tests.yaml up --build --force-recreate --abort-on-container-exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berthertogen/quizmeister.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berthertogen/quizmeister/issues"
+  },
+  "homepage": "https://github.com/berthertogen/quizmeister#readme"
+}

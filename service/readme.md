@@ -1,7 +1,27 @@
+# Run integration tests
+
+* docker => ../npm run test
+* local => SERVICE_URL='http://localhost:5000' jest
+
+clear tables
+```sql
+delete dbo.Questions
+delete dbo.Answers
+delete dbo.Scorings
+
+DBCC CHECKIDENT ('dbo.Questions', RESEED, 0);
+DBCC CHECKIDENT ('dbo.Answers', RESEED, 0);
+DBCC CHECKIDENT ('dbo.Scorings', RESEED, 0);
+GO
+
+```
+
 # Migrations
 
 `dotnet ef migrations add *** --context QuizmeisterContext --output-dir ./Data/Migrations`
 `dotnet run --project ./MigrationTool/MigrationTool.csproj`
+
+
 
 # Api
 
@@ -43,8 +63,3 @@ Clean & fetch => `git fetch -p`
 # Formatting
 
 dotnet tool install -g dotnet-format
-
-
-
-
-DOTNETCORE|5.0

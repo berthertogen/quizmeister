@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create question on Post 1`] = `
+Object {
+  "answers": Array [
+    Object {
+      "answerId": 1,
+      "correct": true,
+      "searchField": "trueanswer 1",
+      "text": "answer 1",
+    },
+    Object {
+      "answerId": 2,
+      "correct": false,
+      "searchField": "falseanswer 2",
+      "text": "answer 2",
+    },
+  ],
+  "modifiedOn": Any<String>,
+  "questionId": 1,
+  "remark": "remark",
+  "rounds": null,
+  "scoring": Object {
+    "scoringId": 1,
+    "timeLimitSeconds": 0,
+    "timeScoringInterval": 0,
+    "type": 1,
+    "weightCorrectAnswer": 1,
+    "weightNoAnswer": 0,
+  },
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "title": "title",
+  "type": 2,
+}
+`;
+
+exports[`should delete question on Delete 1`] = `Array []`;
+
+exports[`should get question on Get 1`] = `
+Object {
+  "answers": Array [
+    Object {
+      "answerId": 1,
+      "correct": true,
+      "searchField": "trueanswer 1",
+      "text": "answer 1",
+    },
+    Object {
+      "answerId": 2,
+      "correct": false,
+      "searchField": "falseanswer 2",
+      "text": "answer 2",
+    },
+  ],
+  "modifiedOn": Any<String>,
+  "questionId": 1,
+  "remark": "remark",
+  "rounds": Array [],
+  "scoring": Object {
+    "scoringId": 1,
+    "timeLimitSeconds": 0,
+    "timeScoringInterval": 0,
+    "type": 1,
+    "weightCorrectAnswer": 1,
+    "weightNoAnswer": 0,
+  },
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "title": "title",
+  "type": 2,
+}
+`;
+
+exports[`should get questions on Get (search) 1`] = `
+Array [
+  Object {
+    "answers": Array [
+      Object {
+        "answerId": 1,
+        "correct": true,
+        "searchField": "trueanswer 1",
+        "text": "answer 1",
+      },
+      Object {
+        "answerId": 2,
+        "correct": false,
+        "searchField": "falseanswer 2",
+        "text": "answer 2",
+      },
+    ],
+    "modifiedOn": Any<String>,
+    "questionId": 1,
+    "remark": "remark",
+    "rounds": null,
+    "scoring": Object {
+      "scoringId": 1,
+      "timeLimitSeconds": 0,
+      "timeScoringInterval": 0,
+      "type": 1,
+      "weightCorrectAnswer": 1,
+      "weightNoAnswer": 0,
+    },
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "title": "title",
+    "type": 2,
+  },
+]
+`;
+
+exports[`should update question on Put 1`] = `
+Object {
+  "answers": Array [
+    Object {
+      "answerId": 1,
+      "correct": true,
+      "searchField": "trueanswer 1",
+      "text": "answer 1",
+    },
+    Object {
+      "answerId": 2,
+      "correct": false,
+      "searchField": "falseanswer 2",
+      "text": "answer 2",
+    },
+  ],
+  "modifiedOn": Any<String>,
+  "questionId": 1,
+  "remark": "remark",
+  "rounds": null,
+  "scoring": Object {
+    "scoringId": 1,
+    "timeLimitSeconds": 0,
+    "timeScoringInterval": 0,
+    "type": 1,
+    "weightCorrectAnswer": 1,
+    "weightNoAnswer": 0,
+  },
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "title": "updated title",
+  "type": 2,
+}
+`;
