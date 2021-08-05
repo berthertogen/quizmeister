@@ -22,7 +22,6 @@ test("should create question on Post", async () => {
     .set("Accept", "application/json");
   expect(response.headers["content-type"]).toBe("application/json; charset=utf-8")
   expect(response.status).toBe(200);
-  expect(response.status).toBe(500);
   // expect(response.body).toEqual(
   //   {
   //     questionId: 1,
