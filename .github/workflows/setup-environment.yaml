@@ -8,5 +8,7 @@ jobs:
       QUIZMEISTER_SIGNALR_CONNECTIONSTRING: ${{ secrets.QUIZMEISTER_SIGNALR_CONNECTIONSTRING }}
     steps:
     - uses: actions/checkout@v1
+    - name: Run integration tests
+      run: docker-compose -f docker-compose-integration-tests.yaml up --build --force-recreate --abort-on-container-exit
     - name: Build the docker-compose stack
       run: docker-compose up --build --detach

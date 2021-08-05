@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  quizmeister-sql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      MSSQL_PID: Developer
+      SA_PASSWORD: L8uv794DZavh
+      ACCEPT_EULA: Y
+    deploy:
+      resources:
+        limits:
+          memory: 2000M
+        reservations:
+          memory: 1000M
+
+  quizmeister-service:
+    depends_on:
+      - quizmeister-sql
+    build: 
+      context: ./service
+    environment:
+      QUIZMEISTER_ConnectionStrings__QuizmeisterContext: "Persist Security Info=False;User ID=sa;Password=L8uv794DZavh;Initial Catalog=Quizmeister;Server=quizmeister-sql"
+      QUIZMEISTER_ConnectionStrings__QuizmeisterSignalR: "Endpoint=https://tijdelijke.service.signalr.net;AccessKey=MxSayPqK0N5ZnIJYIVql6tOeIZn3DmhqNi6nDWs+aZQ=;Version=1.0;"
+      QUIZMEISTER_ApplicationInsights__InstrumentationKey: ""
+      ASPNETCORE_URLS: "http://+:80"
+        
+  quizmeister-integration-test:
+    depends_on:
+      - quizmeister-sql
+      - quizmeister-service
+    build:
+      context: ./service
+      dockerfile: Dockerfile-integration-tests
