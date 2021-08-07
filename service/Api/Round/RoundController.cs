@@ -58,16 +58,16 @@ namespace Quizmeister
 
         [HttpPut]
         [Route("{id}/copy")]
-        public async Task<ActionResult> Copy(int id, [FromBody] int[] roundIds)
+        public async Task<ActionResult> Copy(int id, [FromBody] int[] questionIds)
         {
-            return Ok(await rounds.Copy(id, roundIds));
+            return Ok(await rounds.Copy(id, questionIds));
         }
 
         [HttpDelete]
-        [Route("{id}/{deleteRounds}")]
-        public async Task<ActionResult> Delete(int id, bool deleteRounds)
+        [Route("{id}/{deleteQuestions}")]
+        public async Task<ActionResult> Delete(int id, bool deleteQuestions)
         {
-            return Ok(await rounds.Delete(id, deleteRounds));
+            return Ok(await rounds.Delete(id, deleteQuestions));
         }
     }
 }

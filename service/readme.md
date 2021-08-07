@@ -1,20 +1,9 @@
 # Run integration tests
 
-* docker => ../npm run test
-* local => SERVICE_URL='http://localhost:5000' jest
-
-clear tables
-```sql
-delete dbo.Questions
-delete dbo.Answers
-delete dbo.Scorings
-
-DBCC CHECKIDENT ('dbo.Questions', RESEED, 0);
-DBCC CHECKIDENT ('dbo.Answers', RESEED, 0);
-DBCC CHECKIDENT ('dbo.Scorings', RESEED, 0);
-GO
-
-```
+* docker (ci) => ../npm run test
+* local 
+  * start service => npm run startup
+  * run tests => npm run testlocal
 
 # Migrations
 

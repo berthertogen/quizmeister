@@ -25,7 +25,7 @@ namespace Quizmeister
               .Include(q => q.QuizzesRounds)
               .ThenInclude(qr => qr.Round)
               .SingleOrDefaultAsync(q => q.QuizId == quiz.QuizId);
-            return newQuiz.ToQuiz(false);
+            return newQuiz.ToQuiz(true);
         }
 
         internal async Task<Quiz> Update(int quizId, QuizCreateInput input)
@@ -40,7 +40,7 @@ namespace Quizmeister
               .Include(q => q.QuizzesRounds)
               .ThenInclude(qr => qr.Round)
               .SingleOrDefaultAsync(q => q.QuizId == quizId);
-            return newQuiz.ToQuiz(false);
+            return newQuiz.ToQuiz(true);
         }
 
         internal async Task<QuizEvent> UpdateStatus(int quizId, QuizStatus status)

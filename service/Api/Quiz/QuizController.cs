@@ -60,8 +60,8 @@ namespace Quizmeister
         }
 
         [HttpPut]
-        [Route("{id}/status")]
-        public async Task<ActionResult> UpdateStatus(int id, [FromBody] QuizStatus status)
+        [Route("{id}/status/{status}")]
+        public async Task<ActionResult> UpdateStatus(int id, QuizStatus status)
         {
             var quiz = await quizzes.UpdateStatus(id, status);
             await QuizmeisterHub.NextQuizStatus(quizmeisterHub.Clients, quiz);

@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should copy round on Put (copy) 1`] = `
+Object {
+  "modifiedOn": Any<String>,
+  "questions": Array [],
+  "remark": "remark",
+  "roundId": 2,
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "theme": "theme",
+  "title": "updated title - copy",
+}
+`;
+
+exports[`should create round on Post 1`] = `
+Object {
+  "modifiedOn": Any<String>,
+  "questions": Array [
+    Object {
+      "answers": null,
+      "modifiedOn": Any<String>,
+      "questionId": 1,
+      "remark": "remark",
+      "rounds": Array [
+        Object {
+          "modifiedOn": Any<String>,
+          "questions": null,
+          "remark": "remark",
+          "roundId": 1,
+          "searchField": Any<String>,
+          "shortId": Any<String>,
+          "theme": "theme",
+          "title": "title",
+        },
+      ],
+      "scoring": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "title": "title",
+      "type": 2,
+    },
+  ],
+  "remark": "remark",
+  "roundId": 1,
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "theme": "theme",
+  "title": "title",
+}
+`;
+
+exports[`should delete round on Delete 1`] = `Array []`;
+
+exports[`should delete round on Delete 2`] = `Array []`;
+
+exports[`should get round on Get (search) 1`] = `
+Array [
+  Object {
+    "modifiedOn": Any<String>,
+    "questions": Array [
+      Object {
+        "answers": null,
+        "modifiedOn": Any<String>,
+        "questionId": 1,
+        "remark": "remark",
+        "rounds": Array [
+          Object {
+            "modifiedOn": Any<String>,
+            "questions": null,
+            "remark": "remark",
+            "roundId": 1,
+            "searchField": Any<String>,
+            "shortId": Any<String>,
+            "theme": "theme",
+            "title": "title",
+          },
+        ],
+        "scoring": null,
+        "searchField": Any<String>,
+        "shortId": Any<String>,
+        "title": "title",
+        "type": 2,
+      },
+    ],
+    "remark": "remark",
+    "roundId": 1,
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "theme": "theme",
+    "title": "title",
+  },
+]
+`;
+
+exports[`should get round on Get 1`] = `
+Object {
+  "modifiedOn": Any<String>,
+  "questions": Array [
+    Object {
+      "answers": null,
+      "modifiedOn": Any<String>,
+      "questionId": 1,
+      "remark": "remark",
+      "rounds": Array [
+        Object {
+          "modifiedOn": Any<String>,
+          "questions": null,
+          "remark": "remark",
+          "roundId": 1,
+          "searchField": Any<String>,
+          "shortId": Any<String>,
+          "theme": "theme",
+          "title": "title",
+        },
+      ],
+      "scoring": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "title": "title",
+      "type": 2,
+    },
+  ],
+  "remark": "remark",
+  "roundId": 1,
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "theme": "theme",
+  "title": "title",
+}
+`;
+
+exports[`should get themes on Get (themes) 1`] = `
+Array [
+  "theme",
+]
+`;
+
+exports[`should update round on Put 1`] = `
+Object {
+  "modifiedOn": Any<String>,
+  "questions": Array [
+    Object {
+      "answers": null,
+      "modifiedOn": Any<String>,
+      "questionId": 1,
+      "remark": "remark",
+      "rounds": Array [
+        Object {
+          "modifiedOn": Any<String>,
+          "questions": null,
+          "remark": "remark",
+          "roundId": 1,
+          "searchField": Any<String>,
+          "shortId": Any<String>,
+          "theme": "theme",
+          "title": "updated title",
+        },
+      ],
+      "scoring": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "title": "title",
+      "type": 2,
+    },
+  ],
+  "remark": "remark",
+  "roundId": 1,
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "theme": "theme",
+  "title": "updated title",
+}
+`;
