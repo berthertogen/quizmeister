@@ -23,7 +23,7 @@ namespace MigrationTool
             var exception = Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext"));
             while (exception != null && maxCount > 0)
             {
-                Console.WriteLine($"Failed to connect {maxCount}/100, sleeping 5 seconds ... ({exception.ToString()})");
+                Console.WriteLine($"Failed to connect {maxCount}/100, sleeping 5 seconds ... ({exception.Message})");
                 System.Threading.Thread.Sleep(5000);
                 maxCount--;
                 exception = Migrator.CanConnect(configuration.GetConnectionString("QuizmeisterContext"));

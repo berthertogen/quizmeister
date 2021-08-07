@@ -3,15 +3,14 @@ const fs = require('fs');
 
 const sqlConfig = {
   user: "sa",
-  password: "wu4XiEf9D50X",
+  password: process.env.SQL_PASSWORD || "wu4XiEf9D50X",
   database: "Quizmeister",
-  server: 'localhost',
+  server: process.env.SQL_SERVER || 'localhost',
   options: {
     encrypt: true,
     trustServerCertificate: true
   }
 }
-
 
 async function clear() {
   try {

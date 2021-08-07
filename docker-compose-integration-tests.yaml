@@ -6,6 +6,7 @@ services:
       MSSQL_PID: Developer
       SA_PASSWORD: L8uv794DZavh
       ACCEPT_EULA: Y
+      TZ: "Europe/Brussels"
     deploy:
       resources:
         limits:
@@ -25,7 +26,8 @@ services:
       QUIZMEISTER_ConnectionStrings__QuizmeisterSignalR: "Endpoint=https://tijdelijke.service.signalr.net;AccessKey=MxSayPqK0N5ZnIJYIVql6tOeIZn3DmhqNi6nDWs+aZQ=;Version=1.0;"
       QUIZMEISTER_ApplicationInsights__InstrumentationKey: ""
       ASPNETCORE_URLS: "http://+:80"
-    logging:
+      TZ: "Europe/Brussels"
+      logging:
       driver: json-file
           
   quizmeister-integration-test:
@@ -37,6 +39,9 @@ services:
       dockerfile: Dockerfile-integration-tests
     environment:
       SERVICE_URL: "http://quizmeister-service"
-    logging:
+      SQL_SERVER: "quizmeister-sql"
+      SQL_PASSWORD: "L8uv794DZavh"
+      TZ: "Europe/Brussels"
+      logging:
       driver: json-file
   

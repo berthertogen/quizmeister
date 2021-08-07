@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "wait-on -i 1000 -v http://quizmeister-service/health && jest",
+    "test": "wait-on -i 1000 -v http://quizmeister-service/health && jest --runInBand",
     "startup": "./test/startup.sh",
-    "testlocal": "SERVICE_URL='http://localhost:5000' jest --setupFiles=./test/setup-test.js --setupFilesAfterEnv=./test/database/setup-test-database.js"
+    "testlocal": "SERVICE_URL='http://localhost:5000' jest --setupFiles=./test/setup-test.js --setupFilesAfterEnv=./test/database/setup-test-database.js --runInBand"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,9 @@
   "jest": {
     "setupFiles": [
       "./setup-test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./database/setup-test-database.js"
     ]
   },
   "devDependencies": {
