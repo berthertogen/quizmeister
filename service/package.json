@@ -13,25 +13,13 @@
   },
   "author": "",
   "license": "ISC",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged -r"
-    }
-  },
-  "lint-staged": {
-    "*.cs": [
-      "dotnet dotnet-format --include"
-    ]
-  },
   "jest": {
     "setupFiles": [
       "./setup-test.js"
     ]
   },
   "devDependencies": {
-    "husky": "^4.3.0",
     "jest": "^27.0.6",
-    "lint-staged": "^10.5.1",
     "mssql": "^7.2.0",
     "superagent": "^6.1.0",
     "wait-on": "^6.0.0"
