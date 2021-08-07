@@ -25,8 +25,8 @@ test("should create question on Post", async () => {
       }
     })
     .set("Accept", "application/json");
-  expect(response.headers["content-type"]).toBe("application/json; charset=utf-8")
-  expect(response.status).toBe(200);
+  assertContentTypeJson(response);
+  assertStatus200(response);
   expect(response.body).toMatchSnapshot({
     modifiedOn: expect.any(String),
     searchField: expect.any(String),
@@ -38,8 +38,8 @@ test("should get question on Get", async () => {
   var response = await request
     .get(buildUrl(`1`))
     .set("Accept", "application/json");
-  expect(response.headers["content-type"]).toBe("application/json; charset=utf-8")
-  expect(response.status).toBe(200);
+    assertContentTypeJson(response);
+    assertStatus200(response);
   expect(response.body).toMatchSnapshot({
     modifiedOn: expect.any(String),
     searchField: expect.any(String),
@@ -51,8 +51,8 @@ test("should get questions on Get (search)", async () => {
   var response = await request
     .get(buildUrl(`search/0/20`))
     .set("Accept", "application/json");
-  expect(response.headers["content-type"]).toBe("application/json; charset=utf-8")
-  expect(response.status).toBe(200);
+    assertContentTypeJson(response);
+    assertStatus200(response);
   expect(response.body).toMatchSnapshot([{
     modifiedOn: expect.any(String),
     searchField: expect.any(String),
@@ -81,8 +81,21 @@ test("should update question on Put", async () => {
       }
     })
     .set("Accept", "application/json");
-  expect(response.headers["content-type"]).toBe("application/json; charset=utf-8")
-  expect(response.status).toBe(200);
+    assertContentTypeJson(response);
+    assertStatus200(response);
+  expect(response.body).toMatchSnapshot({
+    modifiedOn: expect.any(String),
+    searchField: expect.any(String),
+    shortId: expect.any(String),
+  });
+});
+
+test("should copy question on Put (copy)", async () => {
+  var response = await request
+    .put(buildUrl(`1/copy`))
+    .set("Accept", "application/json");
+    assertContentTypeJson(response);
+    assertStatus200(response);
   expect(response.body).toMatchSnapshot({
     modifiedOn: expect.any(String),
     searchField: expect.any(String),
@@ -91,11 +104,16 @@ test("should update question on Put", async () => {
 });
 
 test("should delete question on Delete", async () => {
-  var responseDelete = await request
+  var responseDelete1 = await request
     .delete(buildUrl(`1`))
     .set("Accept", "application/json");
-  expect(responseDelete.headers["content-type"]).toBe("application/json; charset=utf-8")
-  expect(responseDelete.status).toBe(200);
+    assertContentTypeJson(responseDelete1);
+    assertStatus200(responseDelete1);
+  var responseDelete2 = await request
+    .delete(buildUrl(`2`))
+    .set("Accept", "application/json");
+    assertContentTypeJson(responseDelete2);
+    assertStatus200(responseDelete2);
   var responseGet = await request
     .get(buildUrl(`search/0/20`))
   expect(responseGet.status).toBe(200);

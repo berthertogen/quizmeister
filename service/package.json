@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "wait-on -i 1000 -v http://quizmeister-service/health && jest",
-    "fulltest": ""
+    "startup": "./test/startup.sh",
+    "testlocal": "SERVICE_URL='http://localhost:5000' jest --setupFiles=./test/setup-test.js --setupFilesAfterEnv=./test/database/setup-test-database.js"
   },
   "repository": {
     "type": "git",
@@ -22,11 +23,17 @@
       "dotnet dotnet-format --include"
     ]
   },
+  "jest": {
+    "setupFiles": [
+      "./setup-test.js"
+    ]
+  },
   "devDependencies": {
-    "jest": "^27.0.6",
-    "superagent": "^6.1.0",
     "husky": "^4.3.0",
+    "jest": "^27.0.6",
     "lint-staged": "^10.5.1",
+    "mssql": "^7.2.0",
+    "superagent": "^6.1.0",
     "wait-on": "^6.0.0"
   }
 }

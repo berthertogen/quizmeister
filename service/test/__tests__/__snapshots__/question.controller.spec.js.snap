@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should copy question on Put (copy) 1`] = `
+Object {
+  "answers": Array [
+    Object {
+      "answerId": 3,
+      "correct": true,
+      "searchField": "trueanswer 1",
+      "text": "answer 1",
+    },
+    Object {
+      "answerId": 4,
+      "correct": false,
+      "searchField": "falseanswer 2",
+      "text": "answer 2",
+    },
+  ],
+  "modifiedOn": Any<String>,
+  "questionId": 2,
+  "remark": "remark",
+  "rounds": null,
+  "scoring": Object {
+    "scoringId": 2,
+    "timeLimitSeconds": 0,
+    "timeScoringInterval": 0,
+    "type": 1,
+    "weightCorrectAnswer": 1,
+    "weightNoAnswer": 0,
+  },
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "title": "updated title - copy",
+  "type": 2,
+}
+`;
+
 exports[`should create question on Post 1`] = `
 Object {
   "answers": Array [
