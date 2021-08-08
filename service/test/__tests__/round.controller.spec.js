@@ -20,6 +20,14 @@ test("should get round on Get (search)", async () => {
   expect(response.body).toMatchSnapshot([roundFactory.ignoreProperties(true)]);
 });
 
+test("should get round on Get (quiz)", async () => {
+  await buildPostRequest("quiz", "", quizFactory.create([1]));
+  
+  const response = await buildGetRequest('round', 'search/1');
+  assertContentTypeJsonAndStatus200(response);
+  expect(response.body).toMatchSnapshot([roundFactory.ignoreProperties(true)]);
+});
+
 test("should get themes on Get (themes)", async () => {
   const response = await buildGetRequest('round', 'themes');
   assertContentTypeJsonAndStatus200(response);

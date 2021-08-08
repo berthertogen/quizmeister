@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create round on Post 1`] = `
+Object {
+  "modifiedOn": Any<String>,
+  "questions": Array [
+    Object {
+      "answers": null,
+      "modifiedOn": Any<String>,
+      "questionId": 1,
+      "remark": "remark",
+      "rounds": Array [
+        Object {
+          "modifiedOn": Any<String>,
+          "questions": null,
+          "remark": "remark",
+          "roundId": 1,
+          "searchField": Any<String>,
+          "shortId": Any<String>,
+          "theme": "theme",
+          "title": "title",
+        },
+      ],
+      "scoring": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "title": "title",
+      "type": 2,
+    },
+  ],
+  "remark": "remark",
+  "roundId": 1,
+  "searchField": Any<String>,
+  "shortId": Any<String>,
+  "theme": "theme",
+  "title": "title",
+}
+`;
