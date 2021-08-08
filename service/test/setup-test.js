@@ -2,10 +2,12 @@ const request = require('superagent');
 const questionFactory = require('./factories/question-factory');
 const roundFactory = require('./factories/round-factory');
 const quizFactory = require('./factories/quiz-factory');
+const subscriptionFactory = require('./factories/subscription-factory');
 
 global.questionFactory = questionFactory;
 global.roundFactory = roundFactory;
 global.quizFactory = quizFactory;
+global.subscriptionFactory = subscriptionFactory;
 
 global.assertContentTypeJsonAndStatus200 = (response) => {
   expect(response.headers["content-type"]).toBe("application/json; charset=utf-8");

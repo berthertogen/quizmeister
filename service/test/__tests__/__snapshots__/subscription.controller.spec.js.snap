@@ -1,38 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should create round on Post 1`] = `
+exports[`should create subscription on Post 1`] = `
 Object {
-  "modifiedOn": Any<String>,
-  "questions": Array [
-    Object {
-      "answers": null,
+  "message": null,
+  "status": 1,
+  "subscription": Object {
+    "email": "email",
+    "modifiedOn": Any<String>,
+    "quiz": Object {
+      "date": "2100-01-31T23:00:00",
+      "location": "location",
+      "maxSubscriptions": 20,
       "modifiedOn": Any<String>,
-      "questionId": 1,
+      "quizId": 1,
       "remark": "remark",
-      "rounds": Array [
-        Object {
-          "modifiedOn": Any<String>,
-          "questions": null,
-          "remark": "remark",
-          "roundId": 1,
-          "searchField": Any<String>,
-          "shortId": Any<String>,
-          "theme": "theme",
-          "title": "title",
-        },
-      ],
-      "scoring": null,
+      "rounds": null,
       "searchField": Any<String>,
       "shortId": Any<String>,
+      "status": 2,
+      "subscriptions": null,
       "title": "title",
-      "type": 2,
     },
-  ],
-  "remark": "remark",
-  "roundId": 1,
-  "searchField": Any<String>,
-  "shortId": Any<String>,
-  "theme": "theme",
-  "title": "title",
+    "remark": "remark",
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "status": 1,
+    "subscriptionId": 1,
+    "team": "team",
+  },
+}
+`;
+
+exports[`should delete subscription Delete 1`] = `
+Object {
+  "message": null,
+  "status": 1,
+  "subscription": Object {
+    "email": "email",
+    "modifiedOn": Any<String>,
+    "quiz": Object {
+      "date": "2100-01-31T23:00:00",
+      "location": "location",
+      "maxSubscriptions": 20,
+      "modifiedOn": Any<String>,
+      "quizId": 1,
+      "remark": "remark",
+      "rounds": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "status": 4,
+      "subscriptions": null,
+      "title": "title",
+    },
+    "remark": "remark",
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "status": 2,
+    "subscriptionId": 1,
+    "team": "team",
+  },
+}
+`;
+
+exports[`should delete subscription Delete 2`] = `Array []`;
+
+exports[`should get subscription on Get (email) 1`] = `
+Array [
+  Object {
+    "email": "email",
+    "modifiedOn": Any<String>,
+    "quiz": Object {
+      "date": "2100-01-31T23:00:00",
+      "location": "location",
+      "maxSubscriptions": 20,
+      "modifiedOn": Any<String>,
+      "quizId": 1,
+      "remark": "remark",
+      "rounds": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "status": 2,
+      "subscriptions": null,
+      "title": "title",
+    },
+    "remark": "remark",
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "status": 1,
+    "subscriptionId": 1,
+    "team": "team",
+  },
+]
+`;
+
+exports[`should get subscription on Get (quiz) 1`] = `
+Array [
+  Object {
+    "email": "email",
+    "modifiedOn": Any<String>,
+    "quiz": Object {
+      "date": "2100-01-31T23:00:00",
+      "location": "location",
+      "maxSubscriptions": 20,
+      "modifiedOn": Any<String>,
+      "quizId": 1,
+      "remark": "remark",
+      "rounds": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "status": 2,
+      "subscriptions": null,
+      "title": "title",
+    },
+    "remark": "remark",
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "status": 1,
+    "subscriptionId": 1,
+    "team": "team",
+  },
+]
+`;
+
+exports[`should update subscription status Put (status) 1`] = `
+Object {
+  "message": null,
+  "status": 1,
+  "subscription": Object {
+    "email": "email",
+    "modifiedOn": Any<String>,
+    "quiz": Object {
+      "date": "2100-01-31T23:00:00",
+      "location": "location",
+      "maxSubscriptions": 20,
+      "modifiedOn": Any<String>,
+      "quizId": 1,
+      "remark": "remark",
+      "rounds": null,
+      "searchField": Any<String>,
+      "shortId": Any<String>,
+      "status": 4,
+      "subscriptions": null,
+      "title": "title",
+    },
+    "remark": "remark",
+    "searchField": Any<String>,
+    "shortId": Any<String>,
+    "status": 2,
+    "subscriptionId": 1,
+    "team": "team",
+  },
 }
 `;

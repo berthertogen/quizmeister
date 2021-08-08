@@ -43,8 +43,8 @@ namespace Quizmeister
         }
 
         [HttpPut]
-        [Route("{id}/status")]
-        public async Task<ActionResult> Create(int id, [FromBody] SubscriptionStatus status)
+        [Route("{id}/status/{status}")]
+        public async Task<ActionResult> Create(int id, SubscriptionStatus status)
         {
             var subscription = await subscriptions.UpdateStatus(id, status);
             if (subscription.Status != MessageStatus.Error)
