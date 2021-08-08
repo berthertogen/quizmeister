@@ -32,6 +32,7 @@ namespace Quizmeister
                 answers = await context.RoundsQuestions
                             .Include(rq => rq.Question)
                             .ThenInclude(q => q.Answers)
+                            .Include(rq => rq.Question)
                             .Where(rq => rq.RoundId == currentStep[0].Round.RoundId)
                             .Select(rq => rq.Question.Answers.First(a => a.Correct).Text)
                             .ToListAsync();
@@ -263,6 +264,9 @@ namespace Quizmeister
               .ThenInclude(q => q.Scoring)
               .Include(q => q.Question)
               .ThenInclude(q => q.Answers)
+              .Include(q => q.Question)
+              .ThenInclude(q => q.RoundsQuestions)
+              .ThenInclude(q => q.Round)
               .Include(q => q.Round);
         }
     }
