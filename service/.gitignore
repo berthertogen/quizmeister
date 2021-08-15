@@ -437,3 +437,4 @@ $RECYCLE.BIN/
 **/appsettings.local.json
 
 .tye
+.env

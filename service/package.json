@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "wait-on -i 1000 -v http://quizmeister-service/health && jest --runInBand",
-    "startup": "./test/startup.sh",
-    "testlocal": "SERVICE_URL='http://localhost:5000' jest --setupFiles=./test/setup-test.js --setupFilesAfterEnv=./test/database/setup-test-database.js --runInBand"
+    "startup-dotnet": "./test/startup-dotnet.sh",
+    "startup-node": "./test/startup-node.sh",
+    "testlocal-dotnet": "SERVICE_URL='http://localhost:5000' jest --setupFiles=./test/setup-test.js --setupFilesAfterEnv=./test/database/setup-test-database.js --runInBand",
+    "testlocal-node": "SERVICE_URL='http://localhost:5000' jest --setupFiles=./test/setup-test.js --setupFilesAfterEnv=./test/database/setup-test-database.js --runInBand"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,17 @@
   "devDependencies": {
     "jest": "^27.0.6",
     "mssql": "^7.2.0",
+    "nodemon": "^2.0.12",
     "superagent": "^6.1.0",
     "wait-on": "^6.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "luxon": "^2.0.1",
+    "mongoose": "^5.13.5",
+    "nanoid": "^3.1.23"
   }
 }
